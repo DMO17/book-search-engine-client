@@ -1,5 +1,10 @@
 import React from "react";
+import { SavedBookCards } from "../components/SavedBookCards";
 
 export const SavedBooks = () => {
-  return <div>SavedBooks</div>;
+  return (
+    <div>
+      <SavedBookCards />
+    </div>
+  );
 };
