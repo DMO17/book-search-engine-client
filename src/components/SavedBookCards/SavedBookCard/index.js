@@ -1,13 +1,13 @@
 import React from "react";
 import "./style.css";
 import Card from "react-bootstrap/Card";
-import { BsFillBookmarkStarFill } from "react-icons/bs";
+import { BsTrash } from "react-icons/bs";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 
-export const SavedBookCard = ({ imageUrl, title, id }) => {
+export const SavedBookCard = ({ imageUrl, title, id, onClickDeleteFuc }) => {
   return (
     <div className="m-3" style={{ position: "relative" }}>
-      <Card style={{ width: "18rem", backgroundColor: "whitesmoke" }}>
+      <Card style={{ width: "18rem", backgroundColor: "whiteSmoke" }}>
         <Card.Img
           variant="top"
           src={
@@ -19,8 +19,8 @@ export const SavedBookCard = ({ imageUrl, title, id }) => {
           <Card.Title className="title-overflow">{title}</Card.Title>
         </Card.Body>
       </Card>
-      <div className="save-icon" id={id}>
-        <BsFillBookmarkStarFill size={40} color="yellow" />
+      <div className="save-icon" id={id} onClick={onClickDeleteFuc}>
+        <BsTrash size={40} color="red" />
       </div>
       <div className="info-icon">
         <BsFillInfoCircleFill size={40} color="lightBlue" />
