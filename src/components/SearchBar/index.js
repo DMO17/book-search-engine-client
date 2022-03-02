@@ -18,8 +18,6 @@ export const SearchForm = () => {
         id
         title
         imageUrl
-        rating
-        description
       }
     }
   `;
@@ -28,7 +26,6 @@ export const SearchForm = () => {
     e.preventDefault();
     await executeSearch();
     if (!!data.searchBooks) {
-      console.log(data);
       await dispatch({
         type: ACTIONS.BOOK_API_CALL,
         payload: { bookData: data.searchBooks },

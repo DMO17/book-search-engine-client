@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AppRouter } from "./AppRouter";
 import { NavigationBar } from "./components/Navbar";
 
+import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const client = new ApolloClient({

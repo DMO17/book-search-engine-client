@@ -1,20 +1,25 @@
 import React from "react";
-
+import "./style.css";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import { BsFillBookmarkStarFill } from "react-icons/bs";
+import { BsFillInfoCircleFill } from "react-icons/bs";
 
-export const BookCard = ({ id, title, imageUrl, description }) => {
+export const BookCard = ({ id, title, imageUrl }) => {
   return (
-    <div>
-      <Card style={{ width: "18rem" }} className="i2ezo4dMMn0C">
+    <div className="m-3" style={{ position: "relative" }} id={id}>
+      <Card style={{ width: "18rem", backgroundColor: "whitesmoke" }}>
         <Card.Img variant="top" src={imageUrl} />
         <Card.Body>
-          <Card.Title>{title}</Card.Title>
-          <Card.Text>{description}</Card.Text>
-          <Button variant="primary">Save</Button>
-          <Button variant="primary">More Info</Button>
+          <Card.Title className="title-overflow">{title}</Card.Title>
         </Card.Body>
       </Card>
+      <div className="save-icon">
+        <BsFillBookmarkStarFill size={40} color="yellow" />
+      </div>
+      <div className="info-icon">
+        <BsFillInfoCircleFill size={40} color="lightBlue" />
+      </div>
     </div>
   );
 };
