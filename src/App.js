@@ -3,7 +3,8 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { BrowserRouter } from "react-router-dom";
 
 import { AppRouter } from "./AppRouter";
-import { NavigationBar } from "./components/Navbar";
+import { PrivateNavigationBar } from "./components/Navbar/PrivateNavigationBar";
+import { PublicNavigationBar } from "./components/Navbar/PublicNavigationBar";
 
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -14,10 +15,11 @@ const client = new ApolloClient({
 });
 
 function App() {
+  const user = false;
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
-        <NavigationBar />
+        {user ? <PrivateNavigationBar /> : <PublicNavigationBar />}
         <AppRouter />
       </BrowserRouter>
     </ApolloProvider>

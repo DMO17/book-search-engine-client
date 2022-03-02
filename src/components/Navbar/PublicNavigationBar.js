@@ -4,7 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 
-export const NavigationBar = () => {
+export const PublicNavigationBar = () => {
   return (
     <Navbar bg="dark" variant="dark" expand="md">
       <Container>
@@ -17,15 +17,15 @@ export const NavigationBar = () => {
             </Nav.Link>
             <Nav.Link
               className="nav-item active mx-4 text-center"
-              href="/saved"
+              href="/login"
             >
-              Saved Books
+              Login
             </Nav.Link>
             <Nav.Link
               className="nav-item active mx-4 text-center"
-              href="/contact-me"
+              href="/signup"
             >
-              Logout
+              Signup
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
