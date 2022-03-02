@@ -15,7 +15,10 @@ export const NavigationBar = () => {
             <Nav.Link className="nav-item active mx-4 text-center" href="/">
               Home
             </Nav.Link>
-            <Nav.Link className="nav-item active mx-4 text-center" href="/work">
+            <Nav.Link
+              className="nav-item active mx-4 text-center"
+              href="/saved"
+            >
               Saved Books
             </Nav.Link>
             <Nav.Link

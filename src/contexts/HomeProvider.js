@@ -4,10 +4,12 @@ export const HomeContext = React.createContext();
 
 const initialState = {
   bookArray: [],
+  savedBookId: "",
 };
 
 const ACTIONS = {
   BOOK_API_CALL: "MAKE-BOOK-API-CALL",
+  SAVE_BOOK_ID: "CHOSEN BOOK ID",
 };
 
 const reducer = (state, action) => {
@@ -17,6 +19,10 @@ const reducer = (state, action) => {
 
       bookArray: action.payload.bookData,
     };
+  }
+
+  if (action.type === ACTIONS.SAVE_BOOK_ID) {
+    return { ...state, savedBookId: action.payload };
   }
 };
 

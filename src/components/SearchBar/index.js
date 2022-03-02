@@ -9,7 +9,7 @@ import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 
 export const SearchForm = () => {
-  const { dispatch, ACTIONS } = useHomeContextValues();
+  const { dispatch, ACTIONS, state } = useHomeContextValues();
   const [searchedBook, setSearchedBook] = useState("");
 
   const SEARCH_BOOKS = gql`
@@ -22,9 +22,18 @@ export const SearchForm = () => {
     }
   `;
 
+  const [executeSearch, { called, loading, data }] = useLazyQuery(
+    SEARCH_BOOKS,
+    {
+      variables: { searchTerm: searchedBook },
+    }
+  );
+
   const onSubmit = async (e) => {
     e.preventDefault();
+
     await executeSearch();
+
     if (!!data.searchBooks) {
       await dispatch({
         type: ACTIONS.BOOK_API_CALL,
@@ -32,13 +41,6 @@ export const SearchForm = () => {
       });
     }
   };
-
-  const [executeSearch, { called, loading, data }] = useLazyQuery(
-    SEARCH_BOOKS,
-    {
-      variables: { searchTerm: searchedBook },
-    }
-  );
 
   return (
     <Container className="mt-5 text-center">
