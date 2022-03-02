@@ -1,5 +1,11 @@
 import React from "react";
+import Container from "react-bootstrap/Container";
+import { SignupForm } from "../components/SignupForm";
 
 export const Signup = () => {
-  return <div>Signup</div>;
+  return (
+    <Container>
+      <SignupForm />
+    </Container>
+  );
 };
