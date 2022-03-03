@@ -1,9 +1,23 @@
 import React from "react";
+import { gql, useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
+
+const LOGIN = gql`
+  mutation Mutation($input: UserLoginInput) {
+    loginUser(input: $input) {
+      token
+      user {
+        id
+        username
+        email
+      }
+    }
+  }
+`;
 
 export const LoginForm = () => {
   const {
@@ -12,8 +26,17 @@ export const LoginForm = () => {
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
-  console.log(errors);
+
+  const [executeLogin, { loading, error, data }] = useMutation(LOGIN);
+
+  const onSubmit = async (data) => {
+    await executeLogin({
+      variables: {
+        input: data,
+      },
+    });
+  };
+
   return (
     <div>
       <div className="h1 text-center mt-5">LOGIN FORM</div>
