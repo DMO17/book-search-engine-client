@@ -2,6 +2,7 @@ import React from "react";
 import { gql, useMutation } from "@apollo/client";
 import { useHomeContextValues } from "../../hooks";
 import { BookCard } from "./BookCard";
+import { useNavigate } from "react-router-dom";
 
 const SAVE_MY_BOOK = gql`
   mutation Mutation($input: UserBooks) {
@@ -15,13 +16,18 @@ const SAVE_MY_BOOK = gql`
   }
 `;
 export const BookCards = () => {
-  const { state, dispatch, ACTIONS, user } = useHomeContextValues();
+  const { state, dispatch, ACTIONS, user, isLoggedIn } = useHomeContextValues();
 
   const [executeSaveBook, { data, loading, error }] = useMutation(SAVE_MY_BOOK);
 
+  const navigate = useNavigate();
+
   const onClickSaveIcon = async (e) => {
+    if (!isLoggedIn) {
+      navigate("/login", { replace: true });
+    }
+
     const id = e.currentTarget.id;
-    console.log(user.username);
     await executeSaveBook({
       variables: {
         input: {
