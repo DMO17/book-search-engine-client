@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { gql, useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
+import { useNavigate } from "react-router-dom";
 
 const LOGIN = gql`
   mutation Mutation($input: UserLoginInput) {
@@ -27,12 +28,43 @@ export const LoginForm = () => {
     formState: { errors },
   } = useForm();
 
-  const [executeLogin, { loading, error, data }] = useMutation(LOGIN);
+  const [executeLogin, { data, loading, error }] = useMutation(LOGIN);
+  console.log(data);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (data) {
+      const { token, user } = data.loginUser;
+
+      console.log(data.loginUser);
+
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+
+      // setIsLoggedIn(true);
+      // setUser({
+      //   id: user.id,
+      //   firstName: user.firstName,
+      //   lastName: user.lastName,
+      //   email: user.email,
+      //   username: user.username,
+      // });
+
+      // navigate("/", { replace: true });
+    }
+  }, [data]);
 
   const onSubmit = async (data) => {
     await executeLogin({
       variables: {
-        input: data,
+        input: {
+          email: data.userEmail,
+          password: data.userPassword,
+        },
       },
     });
   };
@@ -70,7 +102,7 @@ export const LoginForm = () => {
             Submit
           </Button>
         </Form>
-        {Object.keys(errors).length != 0 && (
+        {Object.keys(errors).length !== 0 && (
           <Alert variant={"warning"} className="text-center mt-5">
             Failed to Login, please provide a correct email or password
           </Alert>
