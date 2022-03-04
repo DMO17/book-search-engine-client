@@ -29,40 +29,42 @@ const DELETE_BOOK = gql`
 `;
 
 export const SavedBookCards = () => {
-  const { setIsLoggedIn, setUser, user, isLoggedIn } = useHomeContextValues();
-  const username = user.username;
-  const { loading, error, data } = useQuery(GET_SAVED_BOOKS, {
-    variables: { username },
-  });
+  const { user } = useHomeContextValues();
 
-  console.log(user.username);
+  const { loading, error, data } = useQuery(GET_SAVED_BOOKS, {
+    variables: { username: user.username },
+  });
 
   const [executeDeleteBook, deleteBookData] = useMutation(DELETE_BOOK);
 
   const onClickDeleteIcon = async (e) => {
     const id = e.currentTarget.id;
-
     await executeDeleteBook({
       variables: {
         input: {
           bookId: id,
-          username,
+          username: user.username,
         },
       },
     });
   };
 
   return (
-    <div className="d-flex justify-content-center flex-wrap">
-      {data?.getUsersSavedBooks?.books.map((book, index) => {
-        return (
-          <SavedBookCard
-            {...book}
-            key={index}
-            onClickDeleteFuc={onClickDeleteIcon}
-          />
-        );
-      })}
+    <div>
+      <div className="h1 text-center mt-4 mb-4">
+        {user.username} Saved Books
+      </div>
+      <div className="d-flex justify-content-center flex-wrap">
+        {data?.getUsersSavedBooks?.books.map((book, index) => {
+          return (
+            <SavedBookCard
+              {...book}
+              key={index}
+              onClickDeleteFuc={onClickDeleteIcon}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

@@ -9,7 +9,7 @@ import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 
 export const SearchForm = () => {
-  const { dispatch, ACTIONS } = useHomeContextValues();
+  const { dispatch, ACTIONS, user, isLoggedIn } = useHomeContextValues();
   const [searchedBook, setSearchedBook] = useState("");
 
   const SEARCH_BOOKS = gql`
@@ -44,6 +44,9 @@ export const SearchForm = () => {
 
   return (
     <Container className="mt-5 text-center">
+      {isLoggedIn && (
+        <div className="h1 text-center mt-4 mb-4">WELCOME {user.username}</div>
+      )}
       <Card>
         <Card.Header>BOOK SEARCH ENGINE</Card.Header>
         <Card.Body>

@@ -13,7 +13,7 @@ export const PrivateNavigationBar = () => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Link className="nav-item active mx-4 text-center" href="/">
-              Home
+              MyHome
             </Nav.Link>
             <Nav.Link
               className="nav-item active mx-4 text-center"
