@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 
 export const HomeContext = React.createContext();
 
@@ -28,10 +28,22 @@ const reducer = (state, action) => {
 
 export const HomeProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!localStorage.getItem("token") || false
+  );
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("user")) || undefined
+  );
+
   const globalHomeValues = {
     dispatch,
     state,
     ACTIONS,
+    isLoggedIn,
+    setIsLoggedIn,
+    user,
+    setUser,
   };
 
   return (

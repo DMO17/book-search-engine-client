@@ -9,7 +9,7 @@ import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 
 export const SearchForm = () => {
-  const { dispatch, ACTIONS, state } = useHomeContextValues();
+  const { dispatch, ACTIONS } = useHomeContextValues();
   const [searchedBook, setSearchedBook] = useState("");
 
   const SEARCH_BOOKS = gql`

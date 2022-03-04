@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 import { useNavigate } from "react-router-dom";
+import { useHomeContextValues } from "../../hooks";
 
 const LOGIN = gql`
   mutation Mutation($input: UserLoginInput) {
@@ -29,7 +30,10 @@ export const LoginForm = () => {
   } = useForm();
 
   const [executeLogin, { data, loading, error }] = useMutation(LOGIN);
-  console.log(data);
+
+  const { setIsLoggedIn, setUser, user, isLoggedIn } = useHomeContextValues();
+
+  console.log(isLoggedIn, user);
 
   const navigate = useNavigate();
 
@@ -45,16 +49,14 @@ export const LoginForm = () => {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
-      // setIsLoggedIn(true);
-      // setUser({
-      //   id: user.id,
-      //   firstName: user.firstName,
-      //   lastName: user.lastName,
-      //   email: user.email,
-      //   username: user.username,
-      // });
+      setIsLoggedIn(true);
+      setUser({
+        id: user.id,
+        email: user.email,
+        username: user.username,
+      });
 
-      // navigate("/", { replace: true });
+      navigate("/", { replace: true });
     }
   }, [data]);
 

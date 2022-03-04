@@ -15,18 +15,18 @@ const SAVE_MY_BOOK = gql`
   }
 `;
 export const BookCards = () => {
-  const { state, dispatch, ACTIONS } = useHomeContextValues();
+  const { state, dispatch, ACTIONS, user } = useHomeContextValues();
 
   const [executeSaveBook, { data, loading, error }] = useMutation(SAVE_MY_BOOK);
 
   const onClickSaveIcon = async (e) => {
     const id = e.currentTarget.id;
-    console.log(id);
+    console.log(user.username);
     await executeSaveBook({
       variables: {
         input: {
           bookId: id,
-          username: "tester",
+          username: user.username,
         },
       },
     });

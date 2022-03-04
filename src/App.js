@@ -15,6 +15,8 @@ import { PublicNavigationBar } from "./components/Navbar/PublicNavigationBar";
 
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { HomeProvider } from "./contexts/HomeProvider";
+import { useHomeContextValues } from "./hooks";
 
 const link = createHttpLink({
   uri: "http://localhost:4000/",
@@ -38,13 +40,16 @@ const client = new ApolloClient({
 });
 
 function App() {
-  const user = false;
+  // const { isLoggedIn } = useHomeContextValues();
+  // console.log(isLoggedIn);
   return (
     <ApolloProvider client={client}>
-      <BrowserRouter>
-        {user ? <PrivateNavigationBar /> : <PublicNavigationBar />}
-        <AppRouter />
-      </BrowserRouter>
+      <HomeProvider>
+        <BrowserRouter>
+          {false ? <PrivateNavigationBar /> : <PublicNavigationBar />}
+          <AppRouter />
+        </BrowserRouter>
+      </HomeProvider>
     </ApolloProvider>
   );
 }

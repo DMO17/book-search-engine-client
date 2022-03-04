@@ -2,6 +2,8 @@ import React from "react";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import { SavedBookCard } from "./SavedBookCard";
 
+import { useHomeContextValues } from "../../hooks";
+
 const GET_SAVED_BOOKS = gql`
   query Query($username: String!) {
     getUsersSavedBooks(username: $username) {
@@ -27,20 +29,24 @@ const DELETE_BOOK = gql`
 `;
 
 export const SavedBookCards = () => {
+  const { setIsLoggedIn, setUser, user, isLoggedIn } = useHomeContextValues();
+  const username = user.username;
   const { loading, error, data } = useQuery(GET_SAVED_BOOKS, {
-    variables: { username: "tester" },
+    variables: { username },
   });
+
+  console.log(user.username);
 
   const [executeDeleteBook, deleteBookData] = useMutation(DELETE_BOOK);
 
   const onClickDeleteIcon = async (e) => {
     const id = e.currentTarget.id;
-    console.log(id);
+
     await executeDeleteBook({
       variables: {
         input: {
           bookId: id,
-          username: "tester",
+          username,
         },
       },
     });
