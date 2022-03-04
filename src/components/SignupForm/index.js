@@ -1,9 +1,22 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+
+const SIGNUP = gql`
+  mutation Mutation($input: AddUserInput!) {
+    addUser(input: $input) {
+      user {
+        id
+        username
+        email
+      }
+    }
+  }
+`;
 
 export const SignupForm = () => {
   const {
@@ -12,9 +25,25 @@ export const SignupForm = () => {
     formState: { errors },
   } = useForm();
 
-  // const [executeLogin, { data, loading, error }] = useMutation(LOGIN);
+  const [executeSignUp, { data, loading, error }] = useMutation(SIGNUP);
 
-  const onSubmit = (data) => {};
+  const navigate = useNavigate();
+
+  const onSubmit = async ({ username, email, password }) => {
+    await executeSignUp({
+      variables: {
+        input: {
+          username,
+          email,
+          password,
+        },
+      },
+    });
+
+    if ((username, email, password)) {
+      navigate("/login", { replace: true });
+    }
+  };
 
   return (
     <div>
