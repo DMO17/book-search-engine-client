@@ -31,17 +31,13 @@ export const LoginForm = () => {
 
   const [executeLogin, { data, loading, error }] = useMutation(LOGIN);
 
-  const { setIsLoggedIn, setUser, user, isLoggedIn } = useHomeContextValues();
-
-  console.log(isLoggedIn, user);
+  const { setIsLoggedIn, setUser } = useHomeContextValues();
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (data) {
       const { token, user } = data.loginUser;
-
-      console.log(data.loginUser);
 
       localStorage.removeItem("token");
       localStorage.removeItem("user");
