@@ -8,11 +8,11 @@ import { Signup } from "./pages/Signup";
 import { ViewBook } from "./pages/ViewBook";
 
 export const AppRouter = () => {
-  // const { isLoggedIn } = useHomeContextValues();
+  const { isLoggedIn } = useHomeContextValues();
 
   return (
     <Routes>
-      {true ? (
+      {isLoggedIn ? (
         <>
           <Route path="/saved" element={<SavedBooks />} />
           <Route path="/book/:id" element={<ViewBook />} />

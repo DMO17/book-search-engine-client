@@ -39,9 +39,6 @@ export const LoginForm = () => {
     if (data) {
       const { token, user } = data.loginUser;
 
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
