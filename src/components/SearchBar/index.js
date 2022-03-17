@@ -22,19 +22,18 @@ export const SearchForm = () => {
     }
   `;
 
-  const [executeSearch, { called, loading, data }] = useLazyQuery(
-    SEARCH_BOOKS,
-    {
-      variables: { searchTerm: searchedBook },
-    }
-  );
+  const [executeSearch] = useLazyQuery(SEARCH_BOOKS);
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    await executeSearch();
+    const { data } = await executeSearch({
+      variables: { searchTerm: searchedBook },
+    });
 
-    if (!!data.searchBooks) {
+    console.log(data);
+
+    if (!!data?.searchBooks) {
       await dispatch({
         type: ACTIONS.BOOK_API_CALL,
         payload: { bookData: data.searchBooks },
@@ -78,9 +77,7 @@ export const SearchForm = () => {
             </Form>
           </div>
         </Card.Body>
-        <Card.Footer className="text-muted">
-          About {data?.searchBooks?.length || 0} results
-        </Card.Footer>
+        <Card.Footer className="text-muted">RESULTS</Card.Footer>
       </Card>
     </Container>
   );

@@ -31,7 +31,7 @@ const DELETE_BOOK = gql`
 export const SavedBookCards = () => {
   const { user } = useHomeContextValues();
 
-  const { loading, error, data } = useQuery(GET_SAVED_BOOKS, {
+  const { loading, error, data, refetch } = useQuery(GET_SAVED_BOOKS, {
     variables: { username: user.username },
   });
 
@@ -47,6 +47,8 @@ export const SavedBookCards = () => {
         },
       },
     });
+
+    refetch();
   };
 
   return (
