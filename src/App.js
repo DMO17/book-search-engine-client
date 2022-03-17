@@ -17,7 +17,7 @@ import { HomeProvider } from "./contexts/HomeProvider";
 import { AppNavigationBar } from "./components/Navbar/AppNavbar";
 
 const link = createHttpLink({
-  uri: "http://localhost:4000/",
+  uri: process.env.GRAPHQL || "http://localhost:4000/",
   credentials: "same-origin",
 });
 
