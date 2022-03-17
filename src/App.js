@@ -10,8 +10,6 @@ import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter } from "react-router-dom";
 
 import { AppRouter } from "./AppRouter";
-import { PrivateNavigationBar } from "./components/Navbar/PrivateNavigationBar";
-import { PublicNavigationBar } from "./components/Navbar/PublicNavigationBar";
 
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
