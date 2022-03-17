@@ -16,8 +16,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { HomeProvider } from "./contexts/HomeProvider";
 import { AppNavigationBar } from "./components/Navbar/AppNavbar";
 
+console.log(process.env.GRAPHQL);
+
 const link = createHttpLink({
-  uri: process.env.GRAPHQL || "http://localhost:4000/",
+  uri: process.env.GRAPHQL,
   credentials: "same-origin",
 });
 
