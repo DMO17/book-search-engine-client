@@ -25,7 +25,7 @@ To complete the app, i had to to do the following:
 
 To see the full Deployed Heroku links below
 
-- <a href='hhttps://fast-crag-11535.herokuapp.com/'>Server Side </a>
+- <a href='https://fast-crag-11535.herokuapp.com/'>Server Side </a>
 - <a href='https://ancient-plains-83258.herokuapp.com/'>Client Side </a>
 
 ## User Story
